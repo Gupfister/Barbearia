@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbearia Elite — Agendamento Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap nav">
+<a href="#inicio" class="logo">BARBEARIA <span>ELITE</span></a>
+<button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><i></i></button>
+<nav><ul id="menu">
+<li><a href="#inicio">Início</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#barbeiros">Barbeiros</a></li><li><a href="#agendamento">Agendamento</a></li><li><a href="#contato">Contato</a></li>
+</ul></nav></div></header>
+
+<main>
+<section class="hero" id="inicio"><div class="wrap">
+<div class="pole"></div><span class="tag">Barbearia Premium</span>
+<h1>Seu estilo <em>começa aqui.</em></h1>
+<p>Agende seu horário e tenha uma experiência completa com nossos barbeiros.</p>
+<a href="#agendamento" class="btn">Agendar horário</a>
+<div class="strip"><div><b data-count="5">0</b><span>anos de tradição</span></div><div><b data-count="2400" data-plus="1">0</b><span>clientes atendidos</span></div><div><b data-count="4.9" data-dec="1">0</b><span>avaliação média</span></div></div>
+</div></section>
+
+<section id="servicos"><div class="wrap">
+<span class="tag">O que fazemos</span><h2>Nossos Serviços</h2>
+<div class="grid g-serv" id="servGrid"></div>
+</div></section>
+
+<section class="alt" id="barbeiros"><div class="wrap">
+<span class="tag">Time</span><h2>Nossos Barbeiros</h2>
+<div class="grid g-barb" id="barbGrid"></div>
+</div></section>
+
+<section id="agendamento"><div class="wrap">
+<span class="tag">Reserve online</span><h2>Agende seu Horário</h2>
+<div class="book">
+<div class="prog" id="prog"></div>
+<div class="step active"><span class="stepno">Etapa 1 de 5</span><h3>Escolha o serviço</h3><div class="opts" id="oServ"></div></div>
+<div class="step"><span class="stepno">Etapa 2 de 5</span><h3>Escolha o barbeiro</h3><div class="opts" id="oBarb"></div></div>
+<div class="step"><span class="stepno">Etapa 3 de 5</span><h3>Escolha a data</h3><div class="opts dates" id="oDate"></div><p class="legend">Atendemos de segunda a sábado.</p></div>
+<div class="step"><span class="stepno">Etapa 4 de 5</span><h3>Escolha o horário</h3><div class="opts times" id="oTime"></div><p class="legend">Horários riscados já estão ocupados.</p></div>
+<div class="step"><span class="stepno">Etapa 5 de 5</span><h3>Seus dados</h3>
+<label for="nome">Nome completo</label><input id="nome" autocomplete="name">
+<label for="tel">Telefone (WhatsApp)</label><input id="tel" inputmode="tel" placeholder="(00) 00000-0000" autocomplete="tel">
+<label for="mail">E-mail</label><input id="mail" type="email" autocomplete="email">
+<div class="sum"><h4>Resumo do agendamento</h4><div id="sumBody"></div></div></div>
+<div class="err" id="err" role="alert"></div>
+<div class="actions"><button class="btn ghost" id="back">Voltar</button><button class="btn" id="next">Continuar</button></div>
+</div><p style="text-align:center;margin-top:20px"><button class="btn ghost" id="myOpen">Já agendou? Ver meus horários</button></p></div></section>
+
+<section class="alt" id="contato"><div class="wrap">
+<span class="tag">Fale conosco</span><h2>Contato</h2>
+<div class="contact">
+<div class="card"><h3>📍 Endereço</h3><p>Av. Principal, 1000 — Centro</p></div>
+<div class="card"><h3>📞 Telefone</h3><p>(61) 99999-0000</p></div>
+<div class="card"><h3>🕒 Horário</h3><p>Seg a Sáb: 08h às 19h</p></div>
+</div></div></section>
+
+<section id="admin"><div class="wrap">
+<span class="tag">Restrito</span><h2>Área do Barbeiro</h2>
+<div id="login"><p style="color:var(--mut);margin-bottom:12px">Digite a senha de acesso do barbeiro</p>
+<div class="login"><input id="pin" type="password" placeholder="Senha"><button class="btn" id="enter">Entrar</button></div><div class="err" id="pinErr"></div></div>
+<div id="panel" style="display:none">
+<div class="stats"><div class="stat"><b id="stT">0</b>Ativos</div><div class="stat"><b id="stH">0</b>Hoje</div><div class="stat"><b id="stP">R$ 0</b>Previsto</div><div class="stat"><b id="stR">R$ 0</b>Recebido</div><div class="stat"><b id="stA">R$ 0</b>A receber</div></div>
+<div class="tw" style="margin-bottom:18px"><table><thead><tr><th>Barbeiro</th><th>Atendimentos</th><th>Recebido</th><th>A receber</th></tr></thead><tbody id="byB"></tbody></table></div>
+<div class="fil"><select id="fB"><option value="">Todos os barbeiros</option></select><input type="date" id="fD"><select id="fS"><option value="">Todos os status</option><option value="agendado">Agendado</option><option value="concluido">Concluído</option><option value="cancelado">Cancelado</option></select><button class="btn" id="novo">+ Novo</button><button class="btn ghost" id="csv">Exportar CSV</button></div>
+<div class="tw"><table><thead><tr><th>Data</th><th>Hora</th><th>Cliente</th><th>Serviço</th><th>Barbeiro</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="legend" id="syncInfo"></p>
+<div class="actions" style="justify-content:flex-start"><button class="btn ghost" id="exit">Sair da área</button></div>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Barbearia Elite — Todos os direitos reservados.<br><button id="openAdmin">Área do Barbeiro</button></div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="box">
+<div class="ok">✓</div><h3 style="font-size:1.6rem">Agendamento confirmado!</h3>
+<div class="sum" id="mBody"></div>
+<div class="actions"><a class="btn wa" id="wa" target="_blank" rel="noopener">Receber no WhatsApp</a><a class="btn" id="cal" target="_blank" rel="noopener">Adicionar ao calendário</a><button class="btn ghost" id="again">Novo agendamento</button></div>
+</div></div>
+
+<div class="modal" id="eModal" role="dialog" aria-modal="true"><div class="box left">
+<h3 id="eTitle" style="font-size:1.4rem">Editar agendamento</h3>
+<label for="eNome">Cliente</label><input id="eNome">
+<label for="eTel">Telefone (WhatsApp)</label><input id="eTel" inputmode="tel">
+<label for="eServ">Serviço</label><select id="eServ"></select>
+<label for="eBarb">Barbeiro</label><select id="eBarb"></select>
+<label for="eDate">Data</label><input type="date" id="eDate">
+<label for="eTime">Horário (vaga)</label><select id="eTime"></select>
+<label for="eVal">Valor (R$)</label><input id="eVal" type="number" step="0.01" min="0">
+<label for="eSt">Status</label><select id="eSt"><option value="agendado">Agendado</option><option value="concluido">Concluído</option><option value="cancelado">Cancelado</option></select>
+<label class="chk"><input type="checkbox" id="ePago"> Pagamento recebido</label>
+<div class="err" id="eErr"></div>
+<div class="actions"><button class="btn ghost" id="eCancel">Fechar</button><a class="btn wa" id="eWa" target="_blank" rel="noopener">WhatsApp</a><button class="btn" id="eSave">Salvar</button></div>
+</div></div>
+
+<div class="modal" id="myModal" role="dialog" aria-modal="true"><div class="box left">
+<h3 style="font-size:1.4rem">Meus agendamentos</h3>
+<label for="myTel">Seu telefone (o mesmo do agendamento)</label><input id="myTel" inputmode="tel" placeholder="(00) 00000-0000">
+<div id="myList" style="margin-top:14px"></div>
+<div class="actions"><button class="btn ghost" id="myClose">Fechar</button><button class="btn" id="myGo">Buscar</button></div>
+</div></div>
+<div id="toasts" aria-live="polite"></div>
+<button id="toTop" aria-label="Voltar ao topo">↑</button>
+<script src="script.js"></script>
+</body>
+</html>
